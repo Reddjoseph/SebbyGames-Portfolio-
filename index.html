@@ -1,77 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Red’s Portfolio</title>
   <link rel="stylesheet" href="main.css" />
 </head>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
 <body>
   <header>
-  <nav class="navbar">
-    <div class="logo shimmer-logo">SebbyGames</div>
+    <nav class="navbar">
+      <div class="logo shimmer-logo">SebbyGames</div>
 
-    <div class="nav-actions">
-      <!-- Theme switch -->
-    <div class="theme-switch">
-      <input type="checkbox" id="themeToggle" />
-      <label for="themeToggle" class="switch">
-        <span></span>
-      </label>
-    </div>
+      <div class="nav-actions">
+        <div class="theme-switch">
+          <input type="checkbox" id="themeToggle" />
+          <label for="themeToggle" class="switch"><span></span></label>
+        </div>
 
+        <div class="menu-toggle" id="menuToggle">☰</div>
+      </div>
 
-      <!-- ☰ Mobile menu -->
-      <div class="menu-toggle" id="menuToggle">☰</div>
-    </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <img src="src/profile-photo.jpg" alt="Profile Photo" class="profile-pic" />
+        </div>
 
-  <section class="hero">
-    <img src="src/profile-photo.jpg" alt="Profile Photo" class="profile-pic" />
+        <div class="hero-right">
+          <h1 id="introText">
+            Hi, I'm <span class="highlight" id="nameText">Red!</span>
+            <span class="muted"> — I also go by <em class="alt-name shimmer">Sebby</em></span>
+          </h1>
 
-    <h1 id="introText">
-      Hi, I'm <span class="highlight" id="nameText">Red!</span>, I also go by 
-      <em class="alt-name shimmer">Sebby</em>
-    </h1>
+          <p class="lead">
+            I design and build interactive web apps and games — focused on clean code,
+            playful UI, and useful features.
+          </p>
 
-    <p>Welcome to my portfolio. I love building cool web apps and creative digital projects.</p>
-    <a href="#projects" class="btn">View My Work</a>
-  </section>
+          <div class="hero-cta">
+            <a href="#projects" class="btn">View My Work</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section id="about" class="content-section">
-    <h2>About Me</h2>
-    <p>I'm an aspiring web developer passionate about crafting interactive and user-friendly web experiences.</p>
-  </section>
+    <section id="about" class="content-section about-section">
+      <div class="about-inner">
+        <div class="about-left">
+          <h2>About Me</h2>
+          <p class="about-text">
+            I'm an aspiring web developer with a passion for building polished, interactive
+            experiences. I enjoy turning ideas into projects — from small utilities to
+            full apps — and learning new tech along the way. I focus on clean UI, performance,
+            and usability.
+          </p>
+          <ul class="about-list">
+            <li>Frontend: HTML, CSS, JavaScript</li>
+            <li>Tools: Git, VSCode, Firebase</li>
+            <li>Interests: Game dev, AI, UX</li>
+          </ul>
+        </div>
 
-  <section id="projects" class="content-section">
-  <h2>Projects</h2>
-  <div class="projects-grid">
-    <a href="https://example.com" target="_blank" class="project-card">
-      <img src="src/project1.png" alt="Project 1" class="project-image">
-      <h3>Project One</h3>
-      <p>A simple project description goes here.</p>
-    </a>
+        <div class="about-right">
+          <div class="card accent-card">
+            <h3>Current Focus</h3>
+            <p>Improving UI animations and building a smoother dev workflow for projects and portfolio integrations.</p>
+            <p class="small">Open to collaborations and small freelance gigs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <a href="https://example.com" target="_blank" class="project-card">
-      <img src="src/project2.png" alt="Project 2" class="project-image">
-      <h3>Project Two</h3>
-      <p>Another project description here.</p>
-    </a>
-  </div>
-</section>
+    <section id="projects" class="content-section">
+      <h2>Projects</h2>
 
+      <div class="projects-carousel">
+        <button class="carousel-btn prev" aria-label="Previous">&#10094;</button>
 
-  <section id="contact" class="content-section">
-    <h2>Contact</h2>
-    <p>Let's connect! Reach me at <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-  </section>
+        <div class="projects-wrapper">
+          <div class="projects-track">
+            <div class="project-card">
+              <img src="src/project1.png" alt="Project 1" class="project-image" />
+              <h3><a href="#" class="project-link">REPHERCE</a></h3>
+              <p>A malware detection system with A.I. integration.</p>
+            </div>
+
+            <div class="project-card">
+              <img src="src/project2.png" alt="Project 2" class="project-image" />
+              <h3><a href="#" class="project-link">ARCHEIM</a></h3>
+              <p>A 3D top-down adventure game for mobile.</p>
+            </div>
+
+            <div class="project-card">
+              <img src="src/project1.png" alt="Project 3" class="project-image" />
+              <h3><a href="#" class="project-link">Portfolio Revamp</a></h3>
+              <p>A modern redesign of my personal portfolio.</p>
+            </div>
+
+            <div class="project-card">
+              <img src="src/project1.png" alt="Project 4" class="project-image" />
+              <h3><a href="#" class="project-link">Task Tracker</a></h3>
+              <p>A web app to organize tasks and track progress.</p>
+            </div>
+
+            <div class="project-card">
+              <img src="src/project1.png" alt="Project 5" class="project-image" />
+              <h3><a href="#" class="project-link">WeatherNow</a></h3>
+              <p>A real-time weather forecasting dashboard.</p>
+            </div>
+
+            <div class="project-card">
+              <img src="src/project1.png" alt="Project 6" class="project-image" />
+              <h3><a href="#" class="project-link">Inventory System</a></h3>
+              <p>A smart inventory management system for labs.</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-btn next" aria-label="Next">&#10095;</button>
+      </div>
+
+      <div class="carousel-indicators" id="carouselIndicators" role="tablist" aria-label="Project pages"></div>
+    </section>
+
+    <section id="contact" class="content-section contact-section">
+      <h2>Contact</h2>
+      <p class="contact-text">
+        Want to collaborate or ask about a project? Reach me at
+        <a href="mailto:youremail@example.com">sredjoseph@gmail.com</a>
+      </p>
+      <div class="socials">
+        <a href="https://github.com/Reddjoseph" target="_blank" rel="noopener" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/sebastianred/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://www.facebook.com/RjSbstn/" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>© 2025 Red | All Rights Reserved</p>
