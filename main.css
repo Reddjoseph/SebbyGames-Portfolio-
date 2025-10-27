@@ -429,8 +429,9 @@ body.light-mode .accent-card {
 
 @media (max-width: 768px) {
   .projects-track { gap:16px; }
-  .project-card { flex: 0 0 92%; margin-left:auto; margin-right:auto; }
+  .project-card { flex: 0 0 100%; margin: 0; }
   .carousel-btn { opacity:1; pointer-events:all; }
+  .projects-wrapper { padding: 0 12px; }
 }
 
 /* ========== Carousel Indicators (Light Mode Fix) ========== */
