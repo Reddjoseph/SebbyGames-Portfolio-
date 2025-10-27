@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Red’s Portfolio</title>
+  <title>Sebastian, RJ - Portfolio</title>
   <link rel="stylesheet" href="main.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
 </head>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-/>
 <body>
   <header>
     <nav class="navbar">
@@ -18,8 +18,31 @@
       <div class="nav-actions">
         <div class="theme-switch">
           <input type="checkbox" id="themeToggle" />
-          <label for="themeToggle" class="switch"><span></span></label>
+          <label for="themeToggle" class="switch">
+            <span>
+              <!-- Moon Icon -->
+              <svg class="moon-icon" viewBox="0 0 24 24">
+                <path
+                  d="M21 12.79A9 9 0 0111.21 3 7 7 0 0012 17a7 7 0 009-4.21z"
+                />
+              </svg>
+
+              <!-- Sun Icon -->
+              <svg class="sun-icon" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
+            </span>
+          </label>
         </div>
+
 
         <div class="menu-toggle" id="menuToggle">☰</div>
       </div>
@@ -73,6 +96,12 @@
             <li>Tools: Git, VSCode, Firebase</li>
             <li>Interests: Game dev, AI, UX</li>
           </ul>
+
+          <!-- ===== About Buttons ===== -->
+          <div class="about-buttons">
+            <button class="btn" id="certificatesBtn">Certificates & Workshops</button>
+            <button class="btn btn-ghost" id="clientsBtn">Successful Clients</button>
+          </div>
         </div>
 
         <div class="about-right">
@@ -84,6 +113,61 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== Modals ===== -->
+    <!-- Certificates Modal -->
+    <div id="certificatesModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Certificates & Workshops</h2>
+
+        <div class="certificates-grid">
+          <div class="certificate-card">
+            <img src="src/cert1.jpg" alt="Certificate 1" />
+            <h3>Cybersecurity Framework</h3>
+            <p>Completed an intensive 20 hours training about Cybersecurity incidents and threats analysis.</p>
+          </div>
+
+          <div class="certificate-card">
+            <img src="src/cert2.jpg" alt="Certificate 2" />
+            <h3>Cybersecurity for Everyone</h3>
+            <p>Participated in my college' Cybersecurity guidelines & practices seminar.</p>
+          </div>
+
+          <div class="certificate-card">
+            <img src="src/cert3.jpg" alt="Certificate 3" />
+            <h3>5G Mobile Networks</h3>
+            <p>Participated in USAID online training on Advancing Open RAN in ASIA about 5G Networks.</p>
+          </div>
+
+          <div class="certificate-card">
+            <img src="src/cert3.jpg" alt="Certificate 3" />
+            <h3>5G Mobile Networks</h3>
+            <p>Participated in USAID online training on Advancing Open RAN in ASIA about 5G Networks.</p>
+          </div>
+
+          <div class="certificate-card">
+            <img src="src/cert3.jpg" alt="Certificate 3" />
+            <h3>5G Mobile Networks</h3>
+            <p>Participated in USAID online training on Advancing Open RAN in ASIA about 5G Networks.</p>
+          </div>
+
+          <div class="certificate-card">
+            <img src="src/cert3.jpg" alt="Certificate 3" />
+            <h3>5G Mobile Networks</h3>
+            <p>Participated in USAID online training on Advancing Open RAN in ASIA about 5G Networks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="clientsModal">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Successful Clients</h3>
+        <p>Coming soon — showcase your collaborations and client success stories here!</p>
+      </div>
+    </div>
 
     <section id="projects" class="content-section">
       <h2>Projects</h2>
@@ -141,7 +225,7 @@
       <h2>Contact</h2>
       <p class="contact-text">
         Want to collaborate or ask about a project? Reach me at
-        <a href="mailto:youremail@example.com">sredjoseph@gmail.com</a>
+        <a href="mailto:sredjoseph@gmail.com">sredjoseph@gmail.com</a>
       </p>
       <div class="socials">
         <a href="https://github.com/Reddjoseph" target="_blank" rel="noopener" aria-label="GitHub">

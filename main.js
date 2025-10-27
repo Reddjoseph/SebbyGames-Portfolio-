@@ -1,10 +1,10 @@
 // =========================
-// 🌗 Theme Toggle + Hamburger Menu + Projects Carousel
+// Theme Toggle + Hamburger Menu + Projects Carousel
 // =========================
 
 document.addEventListener("DOMContentLoaded", () => {
   // =========================
-  // 📱 Mobile Menu Toggle
+  // Mobile Menu Toggle
   // =========================
   const menuToggle = document.getElementById("menuToggle");
   const navLinks = document.getElementById("navLinks");
@@ -16,7 +16,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Hamburger animation (3-line to X)
+  // =========================
+  // Close mobile menu when link is clicked
+  // =========================
+  const navLinkItems = document.querySelectorAll(".nav-links a");
+
+  navLinkItems.forEach(link => {
+    link.addEventListener("click", () => {
+      if (window.innerWidth <= 768 && navLinks.classList.contains("active")) {
+        navLinks.classList.remove("active");
+        menuToggle.classList.remove("open");
+      }
+    });
+  });
+
+
+  // Hamburger animation
   if (menuToggle) {
     const style = document.createElement("style");
     style.textContent = `
@@ -47,9 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     document.head.appendChild(style);
   }
-
+  
   // =========================
-  // 🌗 Light / Dark Theme Toggle
+  // Light / Dark Theme Toggle
   // =========================
   const themeToggle = document.getElementById("themeToggle");
   const body = document.body;
@@ -78,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================
-  // 🎯 Robust Projects Carousel (3 / 2 / 1 responsive)
+  // Robust Projects Carousel
   // =========================
   (function () {
     const wrapper = document.querySelector(".projects-wrapper");
@@ -89,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const indicatorsContainer = document.getElementById("carouselIndicators");
     if (!wrapper || !track || cards.length === 0) return;
 
-    // determine how many cards we'd like visible based on CSS breakpoints
+    // determine how many cards is visible based on CSS breakpoints
     const visibleCount = () => {
       const w = window.innerWidth;
       if (w <= 768) return 1;       // mobile
@@ -120,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
       dots.forEach((dot, idx) => dot.classList.toggle("active", idx === currentPage));
     }
 
-    // Scroll by exactly the wrapper's visible width (one "page" at a time)
+    // Scroll by exactly the wrapper's visible width
     function goToPage(pageIndex, smooth = true) {
       const perPage = visibleCount();
       // Clamp pageIndex
@@ -222,38 +237,76 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 
   // ==================== Animated Name Text (Typewriter + Cursor) ====================
-(function () {
-  const nameEl = document.getElementById("nameText");
-  if (!nameEl) return;
+  (function () {
+    const nameEl = document.getElementById("nameText");
+    if (!nameEl) return;
 
-  const names = ["Red!", "RJ.!"];
-  let index = 0;
-  let charIndex = 0;
-  let typing = true;
+    const names = ["Red!", "RJ.!"];
+    let index = 0;
+    let charIndex = 0;
+    let typing = true;
 
-  function type() {
-    const current = names[index];
+    function type() {
+      const current = names[index];
 
-    if (typing) {
-      nameEl.textContent = current.substring(0, charIndex + 1);
-      charIndex++;
-      if (charIndex === current.length) {
-        typing = false;
-        setTimeout(type, 2000); // pause when fully typed
-        return;
+      if (typing) {
+        nameEl.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === current.length) {
+          typing = false;
+          setTimeout(type, 2000);
+          return;
+        }
+      } else {
+        nameEl.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          typing = true;
+          index = (index + 1) % names.length;
+        }
       }
-    } else {
-      nameEl.textContent = current.substring(0, charIndex - 1);
-      charIndex--;
-      if (charIndex === 0) {
-        typing = true;
-        index = (index + 1) % names.length;
-      }
+      setTimeout(type, typing ? 140 : 100);
     }
-    setTimeout(type, typing ? 140 : 100);
-  }
 
-  type();
-})();
+    type();
+  })();
+
+  // ==================== Modals (Certificates & Clients) ====================
+  (function() {
+    const modals = {
+      certificates: document.getElementById("certificatesModal"),
+      clients: document.getElementById("clientsModal"),
+    };
+
+    const buttons = {
+      certificates: document.getElementById("certificatesBtn"),
+      clients: document.getElementById("clientsBtn"),
+    };
+
+    const closeBtns = document.querySelectorAll(".close-btn");
+
+    // Open modals
+    buttons.certificates?.addEventListener("click", () => {
+      modals.certificates.classList.add("active");
+    });
+    buttons.clients?.addEventListener("click", () => {
+      modals.clients.classList.add("active");
+    });
+
+    // Close modals
+    closeBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.closest(".modal").classList.remove("active");
+      });
+    });
+
+    // Close when clicking outside modal content
+    Object.values(modals).forEach(modal => {
+      modal?.addEventListener("click", e => {
+        if (e.target === modal) modal.classList.remove("active");
+      });
+    });
+  })();
+
 
 });
