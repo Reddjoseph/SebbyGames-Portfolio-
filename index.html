@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Red’s Portfolio</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+  <header>
+  <nav class="navbar">
+    <div class="logo shimmer-logo">SebbyGames</div>
+
+    <div class="nav-actions">
+      <!-- Theme switch -->
+    <div class="theme-switch">
+      <input type="checkbox" id="themeToggle" />
+      <label for="themeToggle" class="switch">
+        <span></span>
+      </label>
+    </div>
+
+
+      <!-- ☰ Mobile menu -->
+      <div class="menu-toggle" id="menuToggle">☰</div>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <section class="hero">
+    <img src="src/profile-photo.jpg" alt="Profile Photo" class="profile-pic" />
+
+    <h1 id="introText">
+      Hi, I'm <span class="highlight" id="nameText">Red!</span>, I also go by 
+      <em class="alt-name shimmer">Sebby</em>
+    </h1>
+
+    <p>Welcome to my portfolio. I love building cool web apps and creative digital projects.</p>
+    <a href="#projects" class="btn">View My Work</a>
+  </section>
+
+  <section id="about" class="content-section">
+    <h2>About Me</h2>
+    <p>I'm an aspiring web developer passionate about crafting interactive and user-friendly web experiences.</p>
+  </section>
+
+  <section id="projects" class="content-section">
+  <h2>Projects</h2>
+  <div class="projects-grid">
+    <a href="https://example.com" target="_blank" class="project-card">
+      <img src="src/project1.png" alt="Project 1" class="project-image">
+      <h3>Project One</h3>
+      <p>A simple project description goes here.</p>
+    </a>
+
+    <a href="https://example.com" target="_blank" class="project-card">
+      <img src="src/project2.png" alt="Project 2" class="project-image">
+      <h3>Project Two</h3>
+      <p>Another project description here.</p>
+    </a>
+  </div>
+</section>
+
+
+  <section id="contact" class="content-section">
+    <h2>Contact</h2>
+    <p>Let's connect! Reach me at <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Red | All Rights Reserved</p>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

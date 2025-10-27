@@ -1,0 +1,401 @@
+/* ========== Variables ========== */
+:root {
+  --bg-color: #0d1117;
+  --text-color: #f5f5f5;
+  --accent-color: #58a6ff;
+  --card-bg: #161b22;
+}
+
+body.light-mode {
+  --bg-color: #f5f5f5;
+  --text-color: #0d1117;
+  --accent-color: #1f6feb;
+  --card-bg: #ffffff;
+}
+
+/* ========== Base ========== */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  color: var(--text-color);
+  background: var(--bg-color);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* ========== Navbar ========== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: var(--accent-color);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto; 
+}
+
+/* ========== Logo Glow ========== */
+.shimmer-logo {
+  background: linear-gradient(
+    120deg,
+    var(--accent-color) 0%,
+    #9ecbff 25%,
+    var(--accent-color) 50%,
+    #9ecbff 75%,
+    var(--accent-color) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: shimmerLogoFlow 4s linear infinite;
+}
+
+@keyframes shimmerLogoFlow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ========== Switch ========== */
+.theme-switch {
+  position: relative;
+  order: 2;
+}
+
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  order: 1;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 28px;
+  background: #555;
+  border-radius: 34px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+/* Icons (sun & moon) */
+.switch::before,
+.switch::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.switch::before {
+  content: "☀️";
+  left: 8px;
+}
+
+.switch::after {
+  content: "🌙";
+  right: 8px;
+}
+
+/* White toggle knob */
+.switch span {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+/* Hide default checkbox */
+#themeToggle {
+  display: none;
+}
+
+/* Checked (light mode) state */
+#themeToggle:checked + .switch {
+  background: var(--accent-color);
+}
+
+#themeToggle:checked + .switch span {
+  transform: translate(28px, -50%);
+}
+
+.switch:hover span {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive (mobile view fix) */
+@media (max-width: 768px) {
+  .switch {
+    width: 46px;
+    height: 24px;
+  }
+
+  .switch::before {
+    font-size: 12px;
+    left: 6px;
+  }
+
+  .switch::after {
+    font-size: 12px;
+    right: 6px;
+  }
+
+  .switch span {
+    width: 18px;
+    height: 18px;
+    left: 3px;
+  }
+
+  #themeToggle:checked + .switch span {
+    transform: translate(22px, -50%);
+  }
+}
+
+/* ========== Hero ========== */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, var(--bg-color) 0%, var(--card-bg) 100%);
+}
+
+.hero h1 {
+  font-size: 2.3rem;
+  margin-top: 25px;
+  line-height: 1.4;
+}
+
+.profile-pic {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent-color);
+  box-shadow: 0 0 25px color-mix(in srgb, var(--accent-color) 60%, transparent);
+  animation: float 3s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-pic:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px color-mix(in srgb, var(--accent-color) 80%, transparent);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ========== Text Effects ========== */
+.highlight {
+  color: var(--accent-color);
+  display: inline-block;
+  transition: opacity 0.5s ease, text-shadow 0.5s ease;
+  opacity: 1;
+}
+
+.glow {
+  text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+}
+
+.alt-name {
+  color: var(--accent-color);
+  font-weight: 500;
+  font-style: italic;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer {
+  background: linear-gradient(
+    120deg,
+    var(--accent-color) 0%,
+    #9ecbff 25%,
+    var(--accent-color) 50%,
+    #9ecbff 75%,
+    var(--accent-color) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: shimmerFlow 3s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes shimmerFlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* ========== Buttons ========== */
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  background: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #1f6feb;
+}
+
+/* ========== Sections ========== */
+.content-section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.project-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s, background 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+/* ========== Projects ========== */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+  background: transparent; /* made transparent */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: none;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  background: color-mix(in srgb, var(--accent-color) 10%, transparent);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.project-image {
+  width: 100%;
+  max-width: 300px;
+  height: 180px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  object-fit: contain;
+  background: transparent;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.05);
+}
+
+.project-card h3 {
+  margin: 10px 0 5px;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+.project-card p {
+  font-size: 0.9rem;
+  text-align: center;
+  opacity: 0.85;
+}
+
+
+/* ========== Footer ========== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--card-bg);
+  font-size: 0.9rem;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: var(--card-bg);
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 200px;
+    border-radius: 5px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .profile-pic {
+    width: 140px;
+    height: 140px;
+  }
+}
