@@ -309,4 +309,228 @@ document.addEventListener("DOMContentLoaded", () => {
   })();
 
 
+  // =========================
+// Ambient Effects: Subtle Stars + Accent Meteors (Dark) / Detailed Snowflakes (Light)
+// =========================
+(function () {
+  const container = document.getElementById("ambient-bg");
+  if (!container) return;
+
+  let canvas, ctx;
+  let mode = null;
+  let animationId;
+  let particles = [];
+  let accentColor;
+  let meteorTimers = []; // to track setTimeouts
+
+  // --------------------------
+  // STAR + METEOR (accent lowkey version)
+  // --------------------------
+  class Star {
+    constructor(w, h) {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.size = Math.random() * 1.3 + 0.4;
+      this.alpha = Math.random() * 0.3 + 0.3;
+      this.twinkleSpeed = Math.random() * 0.01 + 0.005;
+    }
+    update() {
+      this.alpha += this.twinkleSpeed * (Math.random() > 0.5 ? 1 : -1);
+      this.alpha = Math.min(Math.max(this.alpha, 0.1), 0.6);
+    }
+    draw(ctx) {
+      ctx.globalAlpha = this.alpha;
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  class Meteor {
+    constructor(w, h, color) {
+      this.color = color;
+      this.reset(w, h);
+    }
+    reset(w, h) {
+      this.x = Math.random() * w;
+      this.y = -50 - Math.random() * h * 0.5;
+      this.len = 70 + Math.random() * 40;
+      this.speed = 6 + Math.random() * 3;
+      this.angle = Math.PI / 4; // 45° down-right
+      this.opacity = 0.4;
+    }
+    update(w, h) {
+      this.x += this.speed * Math.cos(this.angle);
+      this.y += this.speed * Math.sin(this.angle);
+    }
+    isOffscreen(w, h) {
+      return this.x > w + this.len || this.y > h + this.len;
+    }
+    draw(ctx) {
+      const xEnd = this.x - this.len * Math.cos(this.angle);
+      const yEnd = this.y - this.len * Math.sin(this.angle);
+      const gradient = ctx.createLinearGradient(this.x, this.y, xEnd, yEnd);
+      gradient.addColorStop(0, this.color);
+      gradient.addColorStop(1, "transparent");
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(this.x, this.y);
+      ctx.lineTo(xEnd, yEnd);
+      ctx.stroke();
+    }
+  }
+
+  function initStars(w, h) {
+    particles = [];
+    for (let i = 0; i < 60; i++) particles.push(new Star(w, h));
+    scheduleMeteor(w, h);
+  }
+
+  // --- Meteor scheduler (controlled & rare) ---
+  function scheduleMeteor(w, h) {
+    // Clear any pending timeouts before creating new ones
+    meteorTimers.forEach(clearTimeout);
+    meteorTimers = [];
+
+    const spawn = () => {
+      if (mode !== "stars") return;
+      if (particles.filter(p => p instanceof Meteor).length < 2) {
+        particles.push(new Meteor(w, h, accentColor));
+      }
+      // Schedule next spawn
+      const next = 6000 + Math.random() * 4000; // 6–10 sec
+      const t = setTimeout(spawn, next);
+      meteorTimers.push(t);
+    };
+    spawn();
+  }
+
+  function drawStars(w, h) {
+    ctx.clearRect(0, 0, w, h);
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.update(w, h);
+      p.draw(ctx);
+      if (p instanceof Meteor && p.isOffscreen(w, h)) {
+        particles.splice(i, 1); // remove old meteors
+      }
+    }
+  }
+
+  // --------------------------
+  // SNOWFLAKE BACKGROUND (detailed)
+  // --------------------------
+  class Snowflake {
+    constructor(w, h) {
+      this.reset(w, h);
+    }
+    reset(w, h) {
+      this.x = Math.random() * w;
+      this.y = Math.random() * -h;
+      this.size = 6 + Math.random() * 10;
+      this.speedY = 0.4 + Math.random() * 1.5;
+      this.speedX = (Math.random() - 0.5) * 0.5;
+      this.angle = Math.random() * Math.PI * 2;
+      this.spin = (Math.random() - 0.5) * 0.02;
+      this.opacity = 0.4 + Math.random() * 0.6;
+      this.color = `rgba(${150 + Math.random() * 60}, ${200 + Math.random() * 55}, 255, ${this.opacity})`;
+    }
+    update(w, h) {
+      this.angle += this.spin;
+      this.x += Math.sin(this.angle) * 0.6 + this.speedX;
+      this.y += this.speedY;
+      if (this.y > h + 20) this.reset(w, h);
+    }
+    draw(ctx) {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.angle);
+      ctx.strokeStyle = this.color;
+      ctx.lineWidth = 1.1;
+      ctx.beginPath();
+      const r = this.size / 2;
+      for (let i = 0; i < 6; i++) {
+        const a = (i * Math.PI) / 3;
+        const x = r * Math.cos(a);
+        const y = r * Math.sin(a);
+        ctx.moveTo(0, 0);
+        ctx.lineTo(x, y);
+        // side branches
+        const bx1 = x * 0.5;
+        const by1 = y * 0.5;
+        const b1 = a + Math.PI / 6;
+        const b2 = a - Math.PI / 6;
+        ctx.moveTo(bx1, by1);
+        ctx.lineTo(bx1 + Math.cos(b1) * r * 0.3, by1 + Math.sin(b1) * r * 0.3);
+        ctx.moveTo(bx1, by1);
+        ctx.lineTo(bx1 + Math.cos(b2) * r * 0.3, by1 + Math.sin(b2) * r * 0.3);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  function initSnow(w, h) {
+    particles = Array.from({ length: 80 }, () => new Snowflake(w, h));
+  }
+
+  function drawSnow(w, h) {
+    ctx.clearRect(0, 0, w, h);
+    for (const flake of particles) {
+      flake.update(w, h);
+      flake.draw(ctx);
+    }
+  }
+
+  // --------------------------
+  // Core Control
+  // --------------------------
+  function initCanvas() {
+    canvas = document.createElement("canvas");
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+    container.innerHTML = "";
+    container.appendChild(canvas);
+    ctx = canvas.getContext("2d");
+  }
+
+  function animate() {
+    const w = canvas.width, h = canvas.height;
+    if (mode === "snow") drawSnow(w, h);
+    else drawStars(w, h);
+    animationId = requestAnimationFrame(animate);
+  }
+
+  function startAmbient() {
+    cancelAnimationFrame(animationId);
+    meteorTimers.forEach(clearTimeout);
+    meteorTimers = [];
+
+    accentColor = getComputedStyle(document.documentElement)
+      .getPropertyValue("--accent-color")
+      .trim() || "#58a6ff";
+
+    if (!canvas) initCanvas();
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+
+    if (document.body.classList.contains("light-mode")) {
+      mode = "snow";
+      initSnow(canvas.width, canvas.height);
+    } else {
+      mode = "stars";
+      initStars(canvas.width, canvas.height);
+    }
+    animate();
+  }
+
+  startAmbient();
+  document.getElementById("themeToggle")?.addEventListener("change", startAmbient);
+  window.addEventListener("resize", startAmbient);
+})();
+
+
 });
