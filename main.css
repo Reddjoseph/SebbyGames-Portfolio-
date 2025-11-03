@@ -689,6 +689,30 @@ body.light-mode .certificate-card {
   color: var(--muted-color);
 }
 
+.category-dropdown {
+  width: 100%;
+  max-width: 260px;
+  margin-bottom: 20px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--accent-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border 0.25s ease, background 0.25s ease;
+}
+
+.category-dropdown:hover {
+  border-color: color-mix(in srgb, var(--accent-color) 80%, transparent);
+}
+
+body.light-mode .category-dropdown {
+  background: var(--navbar-bg);
+  color: var(--text-color);
+}
+
+
 /* ===== Modal Base ===== */
 .modal {
   position: fixed;

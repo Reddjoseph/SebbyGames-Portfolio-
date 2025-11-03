@@ -44,7 +44,6 @@
           </label>
         </div>
 
-
         <div class="menu-toggle" id="menuToggle">☰</div>
       </div>
 
@@ -98,7 +97,6 @@
             <li>Interests: Game dev, AI, UX</li>
           </ul>
 
-          <!-- ===== About Buttons ===== -->
           <div class="about-buttons">
             <button class="btn" id="certificatesBtn">Certificates & Workshops</button>
             <button class="btn btn-ghost" id="clientsBtn">Successful Clients</button>
@@ -115,61 +113,101 @@
       </div>
     </section>
 
-    <!-- ===== Modals ===== -->
-    <!-- Certificates Modal -->
+    <!-- ===== Certificates Modal ===== -->
     <div id="certificatesModal" class="modal">
       <div class="modal-content">
         <span class="close-btn">&times;</span>
         <h2>Certificates & Workshops</h2>
 
+        <!-- Dropdown filter -->
+        <select id="categorySelect" class="category-dropdown">
+          <option value="all">All Categories</option>
+          <option value="cybersecurity">Cybersecurity</option>
+          <option value="ai">Artificial Intelligence</option>
+          <option value="programming">Programming</option>
+          <option value="academic">Academic Milestones</option>
+        </select>
+
         <div class="certificates-grid">
-          <div class="certificate-card">
+          <div class="certificate-card" data-category="cybersecurity">
             <img src="src/cert1.jpg" alt="Certificate 1" />
             <h3>Cybersecurity Framework</h3>
             <p>Completed an intensive 20 hours training about Cybersecurity incidents and threats analysis.</p>
           </div>
 
-          <div class="certificate-card">
+          <div class="certificate-card" data-category="cybersecurity">
             <img src="src/cert2.jpg" alt="Certificate 2" />
             <h3>Cybersecurity for Everyone</h3>
             <p>Participated in my college' Cybersecurity guidelines & practices seminar.</p>
           </div>
 
-          <div class="certificate-card">
+          <div class="certificate-card" data-category="ai">
             <img src="src/cert3.jpg" alt="Certificate 3" />
             <h3>5G Mobile Networks</h3>
             <p>Participated in USAID online training on Advancing Open RAN in ASIA about 5G Networks.</p>
           </div>
 
-          <div class="certificate-card">
-            <img src="src/cert3.jpg" alt="Certificate 3" />
-            <h3>5G Mobile Networks</h3>
-            <p>Participated in USAID online training on Advancing Open RAN in ASIA about 5G Networks.</p>
+          <div class="certificate-card" data-category="ai">
+            <img src="src/cert4.png" alt="Certificate 4" />
+            <h3>A.I and M.L Training</h3>
+            <p>Participated in USAID online training about A.I and Machine Learning.</p>
           </div>
 
-          <div class="certificate-card">
-            <img src="src/cert3.jpg" alt="Certificate 3" />
-            <h3>5G Mobile Networks</h3>
-            <p>Participated in USAID online training on Advancing Open RAN in ASIA about 5G Networks.</p>
+          <div class="certificate-card" data-category="ai">
+            <img src="src/cert5.png" alt="Certificate 5" />
+            <h3>AI Governance & Ethics</h3>
+            <p>Attended USAID training about ethical applications and governance of A.I systems.</p>
           </div>
 
-          <div class="certificate-card">
-            <img src="src/cert3.jpg" alt="Certificate 3" />
-            <h3>5G Mobile Networks</h3>
-            <p>Participated in USAID online training on Advancing Open RAN in ASIA about 5G Networks.</p>
+          <div class="certificate-card" data-category="academic">
+            <img src="src/cert6.png" alt="Certificate 6" />
+            <h3>Hello World Application</h3>
+            <p>Presented a 3D game focused on learning and A.I application and won as Champion in STI I.T week software pitch.</p>
+          </div>
+
+          <div class="certificate-card" data-category="academic">
+            <img src="src/cert7.png" alt="Certificate 7" />
+            <h3>Tagisan ng Talino - STI</h3>
+            <p>Participated in STI TNT codefest and placed second runner up out of fourteen teams as a team manager.</p>
+          </div>
+
+          <div class="certificate-card" data-category="programming">
+            <img src="src/cert8.png" alt="Certificate 8" />
+            <h3>Python Programming</h3>
+            <p>Attended a 10 days rigorous python programming training on DICT workshop.</p>
+          </div>
+
+          <div class="certificate-card" data-category="academic">
+            <img src="src/cert9.png" alt="Certificate 9" />
+            <h3>Tagisan ng Talino - Champion</h3>
+            <p>Participated and won the STI Dasmarinas Tagisan ng Talino (Codefest) competition.</p>
+          </div>
+
+          <div class="certificate-card" data-category="academic">
+            <img src="src/cert10.png" alt="Certificate 10" />
+            <h3>UMAK Software Presentation</h3>
+            <p>Was nominated to represent STI during UMAK productivity software presentation.</p>
+          </div>
+
+          <div class="certificate-card" data-category="programming">
+            <img src="src/cert11.png" alt="Certificate 11" />
+            <h3>Java Fundamentals</h3>
+            <p>Completed all Java course from Oracle Academy (STI Framework).</p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- ===== Clients Modal ===== -->
     <div class="modal" id="clientsModal">
       <div class="modal-content">
         <span class="close-btn">&times;</span>
         <h3>Successful Clients</h3>
-        <p>Coming soon — showcase your collaborations and client success stories here!</p>
+        <p>Coming soon — Collaborations and successful clients showcase</p>
       </div>
     </div>
 
+    <!-- ===== Projects Section ===== -->
     <section id="projects" class="content-section">
       <h2>Projects</h2>
 

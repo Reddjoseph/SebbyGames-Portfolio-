@@ -533,4 +533,23 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 
+// =========================
+// Certificates Category Filter
+// =========================
+(function() {
+  const select = document.getElementById("categorySelect");
+  const cards = document.querySelectorAll(".certificate-card");
+
+  if (!select || cards.length === 0) return;
+
+  select.addEventListener("change", () => {
+    const value = select.value;
+    cards.forEach(card => {
+      const category = card.dataset.category;
+      card.style.display = (value === "all" || category === value) ? "block" : "none";
+    });
+  });
+})();
+
+
 });
