@@ -1,6 +1,6 @@
-// =========================
+// ===================================================
 // Theme Toggle + Hamburger Menu + Projects Carousel
-// =========================
+// ===================================================
 
 document.addEventListener("DOMContentLoaded", () => {
   // =========================
@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // =========================
+  // ========================================
   // Close mobile menu when link is clicked
-  // =========================
+  // ========================================
   const navLinkItems = document.querySelectorAll(".nav-links a");
 
   navLinkItems.forEach(link => {
@@ -321,7 +321,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let animationId;
   let particles = [];
   let accentColor;
-  let meteorTimers = []; // to track setTimeouts
+  let meteorTimers = [];
 
   // --------------------------
   // STAR + METEOR (accent lowkey version)
@@ -391,7 +391,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Meteor scheduler (controlled & rare) ---
   function scheduleMeteor(w, h) {
-    // Clear any pending timeouts before creating new ones
     meteorTimers.forEach(clearTimeout);
     meteorTimers = [];
 
@@ -485,9 +484,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // --------------------------
+  // ==========================
   // Core Control
-  // --------------------------
+  // ==========================
   function initCanvas() {
     canvas = document.createElement("canvas");
     canvas.width = innerWidth;
@@ -533,23 +532,48 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 
-// =========================
-// Certificates Category Filter
-// =========================
-(function() {
-  const select = document.getElementById("categorySelect");
-  const cards = document.querySelectorAll(".certificate-card");
+  // =============================
+  // Certificates Category Filter 
+  // =============================
+  (function() {
+    const select = document.getElementById("categorySelect");
+    const cards = document.querySelectorAll(".certificate-card");
+    if (!select || !cards.length) return;
 
-  if (!select || cards.length === 0) return;
+    select.addEventListener("change", () => {
+      const value = select.value;
 
-  select.addEventListener("change", () => {
-    const value = select.value;
-    cards.forEach(card => {
-      const category = card.dataset.category;
-      card.style.display = (value === "all" || category === value) ? "block" : "none";
+      cards.forEach((card) => {
+        const match = value === "all" || card.dataset.category === value;
+        if (!match) {
+          card.style.opacity = "0";
+          card.style.transform = "translateY(10px)";
+          card.style.position = "absolute";
+          setTimeout(() => {
+            card.style.display = "none";
+            card.style.position = "static";
+          }, 350);
+        }
+      });
+
+      const visibleCards = Array.from(cards).filter(
+        (card) => value === "all" || card.dataset.category === value
+      );
+
+      visibleCards.forEach((card, i) => {
+        card.style.display = "block";
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "none";
+        setTimeout(() => {
+          requestAnimationFrame(() => {
+            card.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          });
+        }, i * 90);
+      });
     });
-  });
-})();
-
+  })();
 
 });
